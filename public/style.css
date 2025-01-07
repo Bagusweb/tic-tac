@@ -1,0 +1,302 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(45deg, #6b48ff, #ff4848);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.welcome-screen {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+input {
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: 250px;
+}
+
+button {
+    background: #6b48ff;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 2rem auto;
+    max-width: 400px;
+    display: none;
+}
+
+.cell {
+    background: #f5f5f5;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: 2px solid #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.cell:hover {
+    background: #e0e0e0;
+}
+
+.cell.just-played {
+    animation: pop 0.3s ease-out;
+}
+
+.status {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.loading {
+    display: none;
+    margin: 1rem 0;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #6b48ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.battle-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem auto;
+    max-width: 400px;
+    padding: 1rem;
+    background: rgba(0,0,0,0.05);
+    border-radius: 15px;
+}
+
+.player-card {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 45%;
+    transition: all 0.3s ease;
+}
+
+.player-card.active {
+    border: 3px solid #6b48ff;
+    transform: scale(1.05);
+}
+
+.player-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.player-symbol {
+    font-size: 2rem;
+    color: #6b48ff;
+}
+
+.mode-selection {
+    margin-bottom: 2rem;
+}
+
+.mode-btn {
+    margin: 0 0.5rem;
+    padding: 12px 25px;
+    background: transparent;
+    border: 2px solid #6b48ff;
+    color: #6b48ff;
+}
+
+.mode-btn.selected {
+    background: #6b48ff;
+    color: white;
+}
+
+.notification-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    animation: fadeIn 0.3s ease-out;
+    z-index: 1000;
+    min-width: 300px;
+    display: none;
+}
+
+.notification-win {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.notification-lose {
+    background: linear-gradient(45deg, #dc3545, #c82333);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.notification-draw {
+    background: linear-gradient(45deg, #6c757d, #495057);
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.notification-panel .result-text {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.notification-panel .emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.notification-panel button {
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+}
+
+.notification-panel button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 3rem;
+        max-width: 600px;
+    }
+
+    .game-board {
+        max-width: 500px;
+        margin: 2.5rem auto;
+    }
+
+    .battle-info {
+        max-width: 500px;
+    }
+
+    .cell {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 1.5rem;
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .game-board {
+        max-width: 100%;
+        gap: 5px;
+    }
+
+    .cell {
+        font-size: 2.5rem;
+    }
+
+    .battle-info {
+        padding: 0.5rem;
+    }
+
+    .player-card {
+        padding: 0.5rem;
+    }
+
+    .mode-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    input {
+        width: 80%;
+        max-width: 250px;
+    }
+
+    .notification-panel {
+        width: 85%;
+        padding: 1.5rem;
+    }
+}

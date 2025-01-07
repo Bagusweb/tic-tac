@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe Online Battle!</title>
+     <meta name="description" content="A simple and fun online Tic Tac Toe game with PvP and AI modes. Play against friends or challenge the AI in this classic game.">
+    <meta name="keywords" content="tictactoe">
+    <meta property="og:url" content="https://tic-tac-toe.flowfalcon.xyz/" />
+    <meta property="og:title" content="tic-tac-toe online battle" />
+    <meta property="og:image" content="https://flowfalcon.xyz/img/t/prof.jpg" />
+     <link rel="icon" href="https://flowfalcon.xyz/img/t/logo.svg" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-screen">
+            <h1>Tic Tac Toe Battle!</h1>
+            <div class="mode-selection">
+                <button class="mode-btn selected" onclick="selectMode('pvp')">vs Player</button>
+                <button class="mode-btn" onclick="selectMode('ai')">vs AI</button>
+            </div>
+            <input type="text" id="playerName" placeholder="Masukkan nama kamu...">
+            <button onclick="startGame()">Mulai Main!</button>
+        </div>
+        
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            <p>Mencari lawan...</p>
+        </div>
+
+        <div class="battle-info" style="display: none;">
+            <div class="player-card" id="player1">
+                <div class="player-name">Player 1</div>
+                <div class="player-symbol">X</div>
+            </div>
+            <div class="player-card" id="player2">
+                <div class="player-name">Player 2</div>
+                <div class="player-symbol">O</div>
+            </div>
+        </div>
+
+        <div class="game-board">
+            <div class="cell" onclick="makeMove(0)"></div>
+            <div class="cell" onclick="makeMove(1)"></div>
+            <div class="cell" onclick="makeMove(2)"></div>
+            <div class="cell" onclick="makeMove(3)"></div>
+            <div class="cell" onclick="makeMove(4)"></div>
+            <div class="cell" onclick="makeMove(5)"></div>
+            <div class="cell" onclick="makeMove(6)"></div>
+            <div class="cell" onclick="makeMove(7)"></div>
+            <div class="cell" onclick="makeMove(8)"></div>
+        </div>
+
+        <div class="status"></div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="notification-panel" id="notification">
+        <div class="emoji"></div>
+        <div class="result-text"></div>
+        <button onclick="playAgain()">Main Lagi</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
